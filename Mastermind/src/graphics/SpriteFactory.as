@@ -49,8 +49,9 @@ package graphics
 		
 		public function createSlotPion(width:Number, height:Number):PionSprite
 		{
-			return new PionSprite(new Point(135 + j * 50, 155 + i * 72), new Bitmap(spritesheetGame.getTile(22).bitmap));
-			return buildSpriteWithZone(SpriteEnum.SLOT_PION, width, height);
+			//return new PionSprite(new Point(135 + j * 50, 155 + i * 72), new Bitmap(spritesheetGame.getTile(22).bitmap));
+			//return buildSpriteWithZone(SpriteEnum.SLOT_PION, width, height);
+			return null;
 		
 		}
 		
