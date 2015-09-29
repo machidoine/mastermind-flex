@@ -10,11 +10,23 @@ package graphics
 	 */
 	public class SpriteFactory
 	{
-		private var bitmapSheet:BitmapSheet;
+		static private var _instance:SpriteFactory;
+		private var tileFactory:TileFactory;
 		
-		public function SpriteFactory(spriteSheet:BitmapSheet)
+		public function SpriteFactory(spriteSheet:TileFactory)
 		{
-			this.bitmapSheet = spriteSheet;
+			if (_instance)
+				throw new Error("You can't instanciate this class because it is a singleton. Please use getInstance method.");
+			
+			this.tileFactory = spriteSheet;
+		}
+		
+		static public function getInstance(spriteSheet:TileFactory):SpriteFactory
+		{
+			if (_instance == null)
+				_instance = new SpriteFactory(spriteSheet);
+				
+			return _instance;
 		}
 		
 		public function createEmptyCell():Sprite
@@ -44,15 +56,11 @@ package graphics
 		public function createBackgroundWhite(width:Number, height:Number):Sprite
 		{
 			return buildSpriteWithZone(SpriteEnum.BACKGROUND_WHITE, width, height);
-		
 		}
 		
-		public function createSlotPion(width:Number, height:Number):PionSprite
+		public function createSlotPion():Sprite
 		{
-			//return new PionSprite(new Point(135 + j * 50, 155 + i * 72), new Bitmap(spritesheetGame.getTile(22).bitmap));
-			//return buildSpriteWithZone(SpriteEnum.SLOT_PION, width, height);
-			return null;
-		
+			return buildSpriteSized(SpriteEnum.SLOT_PION);		
 		}
 		
 		private function createSpriteFrom(bitmap:BitmapData, width:Number, height:Number):Sprite
@@ -68,14 +76,21 @@ package graphics
 		
 		private function buildSpriteWithZone(sprite:Number, width:Number, height:Number):Sprite
 		{
-			var tile:Tile = bitmapSheet.getTile(sprite);
+			var tile:Tile = tileFactory.getTile(sprite);
 			return createSpriteFrom(tile.bitmap, width, height);
 		}
 		
 		private function buildSprite(sprite:Number):Sprite
 		{
-			var tile:Tile = bitmapSheet.getTile(sprite);
+			var tile:Tile = tileFactory.getTile(sprite);
 			return createSpriteFrom(tile.bitmap, tile.zone.width, tile.zone.height);
+		}
+		
+				
+		private function buildSpriteSized(sprite:Number):Sprite
+		{
+			var tile:Tile = tileFactory.getTile(sprite);
+			return createSpriteFrom(tile.bitmap, tile.size.x, tile.size.y);
 		}
 	
 	}

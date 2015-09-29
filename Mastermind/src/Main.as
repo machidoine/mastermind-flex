@@ -7,9 +7,10 @@ package
 	import flash.events.Event;
 	import flash.geom.Point;
 	import graphics.Assets;
-	import graphics.BoardContainer;
+	import graphics.BackgroundSprite;
 	import graphics.PionSprite;
-	import graphics.BitmapSheet;
+	import graphics.TileFactory;
+	import graphics.PlayBoardSprite;
 	
 	/**
 	 * ...
@@ -29,9 +30,13 @@ package
 		private function init(e:Event = null):void
 		{
 			//TODO : Remove
-			var boardContainer:BoardContainer = new BoardContainer();
+			var boardContainer:BackgroundSprite = new BackgroundSprite(10);
+			var playBoardSprite:PlayBoardSprite = new PlayBoardSprite();
 			addChild(boardContainer);
-			boardContainer.draw();
+			addChild(playBoardSprite);
+			boardContainer.render();
+			playBoardSprite.render();
+			playBoardSprite.x =  0.15 * stage.stageWidth;
 			
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			_mastermindApplication = new MastermindApplication();

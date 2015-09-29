@@ -7,22 +7,35 @@ package graphics
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	public class BitmapSheet extends Sprite
+	public class TileFactory extends Sprite
 	{
+		static private var _instance:TileFactory;
+		
 		private var _tileSheetBitmapData:BitmapData;
 		private var _canvasBitmapData:BitmapData;
 		private var _tileSheetFile:Object;
 		
 		private var _tilePoint:Point;
 		
-		public function BitmapSheet(tileSheetBitmap:Bitmap, tileSheetFile:String)
+		public function TileFactory(tileSheetBitmap:Bitmap, tileSheetFile:String)
 		{
+			if (_instance)
+				throw new Error("You can't instanciate this class because it is a singleton. Please use getInstance method.");
+				
+			
 			_tileSheetBitmapData = tileSheetBitmap.bitmapData;
 			_tileSheetFile = (JSON.parse(tileSheetFile) as Object);
 			
 			_tilePoint = new Point(0, 0);
 			
 			addEventListener(Event.REMOVED_FROM_STAGE, remove);
+		}
+		
+		static public function getInstance(tileSheetBitmap:Bitmap, tileSheetFile:String):TileFactory
+		{
+			if (_instance == null)
+				_instance = new TileFactory(tileSheetBitmap, tileSheetFile);
+			return _instance;
 		}
 		
 		public function getTile(tileNumber:int):Tile
@@ -33,7 +46,7 @@ package graphics
 			
 			_canvasBitmapData.copyPixels(_tileSheetBitmapData, tilerectangle, _tilePoint);
 			
-			return new Tile(_canvasBitmapData.clone(), new Zone(_tileSheetFile.frames[tileNumber].frame.w, _tileSheetFile.frames[tileNumber].frame.h));
+			return new Tile(_canvasBitmapData.clone(), new Zone(_tileSheetFile.frames[tileNumber].frame.w, _tileSheetFile.frames[tileNumber].frame.h), tilerectangle.size);
 		}
 
 		public function remove(e:Event):void

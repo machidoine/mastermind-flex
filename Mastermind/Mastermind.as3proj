@@ -7,7 +7,7 @@
     <movie path="bin\Mastermind.swf" />
     <movie fps="30" />
     <movie width="600" />
-    <movie height="800" />
+    <movie height="720" />
     <movie version="18" />
     <movie minorVersion="0" />
     <movie platform="Flash Player" />
