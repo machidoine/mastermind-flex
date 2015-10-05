@@ -40,7 +40,7 @@ package asunit.textui {
 
         public function ResultPrinter(showTrace:Boolean = false) {
             this.showTrace = showTrace;
-            testTimes = new Array();
+            testTimes = [];
             configureAssets();
             println();
 

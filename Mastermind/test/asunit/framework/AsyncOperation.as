@@ -20,7 +20,7 @@ package asunit.framework {
 			timeout.addEventListener(TimerEvent.TIMER_COMPLETE, onTimeoutComplete);
 			timeout.start();
 			if(handler == null) {
-				handler = function(args:*):* {return;};
+				handler = function(args:*):* {};
 			}
 			this.failureHandler = failureHandler;
 			var context:AsyncOperation = this;
@@ -41,7 +41,7 @@ package asunit.framework {
 				finally {
 					testCase.asyncOperationComplete(context);
 				}
-				return;
+
 			};
 		}
 		

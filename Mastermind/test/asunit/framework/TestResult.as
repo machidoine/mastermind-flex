@@ -19,9 +19,9 @@ package asunit.framework {
         private var fStop:Boolean;
         
         public function TestResult() {
-            fFailures  = new Array();
-            fErrors       = new Array();
-            fListeners = new Array();
+            fFailures  = [];
+            fErrors       = [];
+            fListeners = [];
             fRunTests  = 0;
             fStop       = false;
         }

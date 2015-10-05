@@ -99,9 +99,9 @@ class XMLTestResult implements TestListener {
     public function XMLTestResult(test:Test) {
         this.test = test;
         testName = test.getName().split("::").join(".");
-        failures = new Array();
-        errors = new Array();
-        methods = new Array();
+        failures = [];
+        errors = [];
+        methods = [];
         
         failureHash = new Dictionary();
         errorHash = new Dictionary();

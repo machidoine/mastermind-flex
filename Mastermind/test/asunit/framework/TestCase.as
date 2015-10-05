@@ -120,7 +120,7 @@ package asunit.framework {
 				}
 			}
 			catch(e:Error) {
-				layoutManager = new Object();
+				layoutManager = {};
 				layoutManager.resetAll = function():void {
 				};
 			}
@@ -135,7 +135,7 @@ package asunit.framework {
 		}
 
 		protected function setTestMethods(methodNodes:XMLList):void {
-			testMethods = new Array();
+			testMethods = [];
 			var methodNames:Object = methodNodes.@name;
 			var name:String;
 			for each(var item:Object in methodNames) {
@@ -380,7 +380,7 @@ package asunit.framework {
 		**/
 		protected function addAsync(handler:Function = null, duration:Number=DEFAULT_TIMEOUT, failureHandler:Function=null):Function {
 			if(handler == null) {
-				handler = function(args:*):* {return;};
+				handler = function(args:*):* {};
 			}
 			var async:AsyncOperation = new AsyncOperation(this, handler, duration, failureHandler);
 			asyncQueue.push(async);

@@ -115,8 +115,7 @@ package asunit.framework
                {
                    result.addError(this, error);                         
                }
-        };
-    
+        }
         /**
         * Calls a remote service method and test it 
         * 
@@ -179,8 +178,8 @@ package asunit.framework
                {
                    result.addError(this, error);                         
                }
-                           
 
-        };        
+
+}
     }
 }

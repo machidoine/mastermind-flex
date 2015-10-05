@@ -14,18 +14,18 @@ package asunit.framework {
      *  @includeExample TestSuiteExample.as
      */
     public class TestSuite extends TestCase implements Test {
-        private var fTests:Array = new Array();
+        private var fTests:Array = [];
         private var testsCompleteCount:Number = 0;
         private var iterator:ArrayIterator;
         private var isRunning:Boolean;
 
          public function TestSuite() {
              super();
-             fTests = new Array();
+             fTests = [];
         }
 
         protected override function setTestMethods(methodNodes:XMLList):void {
-            testMethods = new Array();
+            testMethods = [];
         }
         
         /**

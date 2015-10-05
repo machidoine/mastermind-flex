@@ -54,7 +54,7 @@ package asunit.framework {
         
         protected override function setUp():void {
             // create a new instance of the class under test
-            instance = new Object();
+            instance = {};
             if (dataSource != null)    // i.e. there was no IOError or SecurityError
             {
                 // copy the data into a member or method of the _instance
