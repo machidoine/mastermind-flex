@@ -1,13 +1,11 @@
-package player
-{
-	
-	/**
-	 * ...
-	 * @author mOveo Games
-	 */
-	public interface IPlayerable
-	{
-		function getName():String;
-	}
-	
+package player {
+
+/**
+ * ...
+ * @author mOveo Games
+ */
+public interface IPlayerable {
+    function getName():String;
+}
+
 }
