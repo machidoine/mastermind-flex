@@ -1,8 +1,10 @@
-package graphics {
+package graphics.sprite {
 import flash.display.Bitmap;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
+
+import graphics.*;
 
 /**
  * ...
@@ -18,7 +20,8 @@ public class ObjectSprite extends Sprite implements IDisplayable {
         addEventListener(Event.ADDED_TO_STAGE, addedOnStage);
 
     }
-    var _bitmap:Bitmap;
+
+    internal var _bitmap:Bitmap;
     var _location:Point;
 
     public function draw():void {

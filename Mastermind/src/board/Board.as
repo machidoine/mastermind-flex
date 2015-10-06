@@ -6,10 +6,12 @@ import board.row.Row;
  * @author mOveo Games
  */
 public class Board {
-    public function Board(sizeOfBoard:int) {
+
+    public function Board(lineNumber:int) {
         listRows = new Vector.<Row>();
-        maxSize = sizeOfBoard;
+        maxSize = lineNumber;
     }
+
     protected var listRows:Vector.<Row>;
     protected var maxSize:int;
 
@@ -49,6 +51,13 @@ public class Board {
 
     public function getMaxSize():int {
         return maxSize;
+    }
+
+    public function initialize(lineSize:int):void {
+        clear();
+        for (var i:int; i< maxSize; i++) {
+            addRow(Row.generateEmptyRow(lineSize));
+        }
     }
 
 }

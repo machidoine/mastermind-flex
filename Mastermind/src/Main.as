@@ -1,16 +1,20 @@
 package {
 import app.MastermindApplication;
 
+import board.PlayBoard;
+
 import flash.display.Sprite;
 import flash.events.Event;
 
-import graphics.BackgroundSprite;
-import graphics.PlayBoardSprite;
+import graphics.sprite.BackgroundSprite;
+import graphics.sprite.PlayBoardSprite;
 
 /**
  * ...
  * @author mOveo Games
  */
+[SWF(height=800, width=600)]
+
 public class Main extends Sprite {
     public function Main():void {
         if (stage) init();
@@ -23,7 +27,9 @@ public class Main extends Sprite {
     private function init(e:Event = null):void {
         //TODO : Remove
         var boardContainer:BackgroundSprite = new BackgroundSprite(10);
-        var playBoardSprite:PlayBoardSprite = new PlayBoardSprite();
+        var playBoard:PlayBoard = new PlayBoard(10);
+        playBoard.initialize(6);
+        var playBoardSprite:PlayBoardSprite = new PlayBoardSprite(playBoard);
         addChild(boardContainer);
         addChild(playBoardSprite);
         boardContainer.render();

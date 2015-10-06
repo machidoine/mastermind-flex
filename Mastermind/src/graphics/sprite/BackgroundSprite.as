@@ -1,6 +1,10 @@
-package graphics {
+package graphics.sprite {
 import flash.display.Sprite;
 import flash.events.Event;
+
+import graphics.*;
+import graphics.sprite.line.BackgroundLineSprite;
+import graphics.sprite.line.LineSprite;
 
 /**
  * ...
@@ -15,6 +19,7 @@ public class BackgroundSprite extends Sprite {
 
         addEventListener(Event.ADDED_TO_STAGE, addOnStage);
     }
+
     private var spriteFactory:SpriteFactory;
     private var lineCount:Number;
 
@@ -30,7 +35,7 @@ public class BackgroundSprite extends Sprite {
         var playBoardColumnSize:Number = 0.65 * stage.stageWidth;
         var scoreBoarColumnSize:Number = 0.20 * stage.stageWidth;
 
-        var line:LineSprite = new LineSprite();
+        var line:LineSprite = new BackgroundLineSprite();
         line.y = i * lineHeight;
         addChild(line);
 

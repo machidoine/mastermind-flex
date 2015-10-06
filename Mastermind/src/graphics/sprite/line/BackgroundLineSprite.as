@@ -1,19 +1,15 @@
-package graphics {
+/**
+ * Created by Benjamin on 10/6/2015.
+ */
+package graphics.sprite.line {
 import flash.display.Sprite;
 
-/**
- * ...
- * @author ...
- */
-public class LineSprite extends Sprite {
-
-    public function LineSprite() {
+public class BackgroundLineSprite extends LineSprite {
+    public function BackgroundLineSprite() {
         super();
-        currentColumnPosition = 0;
     }
-    private var currentColumnPosition:int;
 
-    public function addColumn(spriteColumn:Sprite) {
+    public override function addColumn(spriteColumn:Sprite):void {
         if (spriteColumn.width + currentColumnPosition > stage.stageWidth) {
             // TODO: exception if adding a column on LineSprite greather than stageWidth
         }
@@ -26,6 +22,6 @@ public class LineSprite extends Sprite {
         addChild(spriteColumn);
     }
 
-}
 
+}
 }

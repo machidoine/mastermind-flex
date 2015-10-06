@@ -1,4 +1,4 @@
-package graphics {
+package graphics.sprite {
 import flash.display.Bitmap;
 import flash.geom.Point;
 
