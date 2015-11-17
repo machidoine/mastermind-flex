@@ -1,5 +1,6 @@
 package board.row {
 import board.pion.Pion;
+import board.pion.PionColor;
 
 /**
  * ...
@@ -9,10 +10,10 @@ public class Row {
     static public const SIZE:int = 6;
 
     public static function generateEmptyRow(size:int):Row {
-        var row:Row = new Row();
+        var        row:Row = new Row();
 
-        for (var i:int; i < size; i++) {
-            row.addPion(new Pion(0));
+        for (var i:int = 0; i < size; i++) {
+            row.addPion(new Pion(PionColor.EMPTY));
         }
 
         return row;
@@ -21,7 +22,7 @@ public class Row {
     public function Row() {
         _listPions = new Vector.<Pion>;
     }
-    protected var _listPions:Vector.<Pion>;
+    private var _listPions:Vector.<Pion>;
 
 
     private var _y:int;
@@ -52,6 +53,16 @@ public class Row {
 
     public function getPionNumber():uint {
         return _listPions.length;
+    }
+
+    public function toString():String {
+        return "Row "+ y + ": "  + getPions();
+    }
+    
+    public function get emptyRow():Boolean {
+        return _listPions.every(function(element:Pion, index:int, array:Array):Boolean {
+            return element.color === PionColor.EMPTY;
+        });
     }
 }
 

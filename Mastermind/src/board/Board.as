@@ -8,58 +8,61 @@ import board.row.Row;
 public class Board {
 
     public function Board(lineNumber:int) {
-        listRows = new Vector.<Row>();
-        maxSize = lineNumber;
+        _listRows = new Vector.<Row>();
+        _maxSize = lineNumber;
     }
 
-    protected var listRows:Vector.<Row>;
-    protected var maxSize:int;
+    private var _listRows:Vector.<Row>;
+    private var    _maxSize:int;
 
     // Ajoute une row au tableau de row
 
     public function addRow(row:Row):void {
-        trace(listRows);
-        row.y = listRows.length;
-        listRows.push(row);
+        trace(_listRows);
+        row.y = _listRows.length;
+        _listRows.push(row);
     }
 
     // Retourne la row en fonction de l'index passé en paramètre
     public function getRow(index:int):Row {
-        return listRows[index];
+        return _listRows[index];
     }
 
 
     // Retourne la liste des rows
     public function getListRow():Vector.<Row> {
-        return listRows;
+        return _listRows;
     }
 
     // Retourne la row courante
     public function currentRow():Row {
-        return listRows[listRows.length - 1];
+        return _listRows[_listRows.length - 1];
     }
 
     // Vide le tableau de row
     public function clear():void {
-        listRows = new Vector.<Row>();
+        _listRows = new Vector.<Row>();
     }
 
     // Retourn true si le tableau de row est plein
     public function isFull():Boolean {
-        return listRows.length >= maxSize;
+        return _listRows.length >= _maxSize;
     }
 
     public function getMaxSize():int {
-        return maxSize;
+        return _maxSize;
     }
 
     public function initialize(lineSize:int):void {
         clear();
-        for (var i:int; i< maxSize; i++) {
+        for (var i:int = 0; i< _maxSize; i++) {
             addRow(Row.generateEmptyRow(lineSize));
         }
     }
 
+    public function set maxSize(value:int):void {
+        _maxSize = value;
+    }
 }
 
 }
