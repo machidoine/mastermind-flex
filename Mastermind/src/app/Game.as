@@ -32,17 +32,13 @@ public class Game {
         _scoreBoard.clear();
     }
 
-    private function isStageContinue(evaluateRow:EvaluateRow):Boolean {
-
-    }
-
     public function playRowToEvaluate(playRow:Row):void {
         // TODO check que l'on peut jouer
-        _playBoard.addRow(playRow);
+        _playBoard.updateCurrentRow(playRow);
     }
 
     public function playScore(scoreRow:EvaluateRow) {
-        _scoreBoard.addRow(scoreRow);
+        _scoreBoard.updateCurrentRow(scoreRow);
         _nbHits++;
     }
 
@@ -57,11 +53,19 @@ public class Game {
     }
 
     public function isFinished():Boolean {
-        return _scoreBoard.currentEvaluatedRow.isWinnerRow() || _playBoard.isFull();
+        return _playBoard.isFull() || _scoreBoard.currentEvaluatedRow.isWinnerRow();
     }
 
     public function isScoreboardWinner():Boolean {
         return _playBoard.isFull() && !_scoreBoard.currentEvaluatedRow.isWinnerRow();
+    }
+
+    public function get playBoard():PlayBoard {
+        return _playBoard;
+    }
+
+    public function get scoreBoard():ScoreBoard {
+        return _scoreBoard;
     }
 }
 

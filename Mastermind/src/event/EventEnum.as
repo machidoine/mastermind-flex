@@ -8,5 +8,6 @@ public class EventEnum {
     public static const ROW_TO_EVALUATE:String = "rowToEvaluate";
     public static const ROW_EVALUATED:String = "rowEvaluated";
     public static const GAME_FINISHED:String = "gameFinished";
+    public static const ROW_CREATED:String = "rowCreated";
 }
 }

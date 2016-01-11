@@ -14,7 +14,7 @@ public class ScoreEvaluator {
         var evaluateRow:EvaluateRow = new EvaluateRow();
 
         for each (var suggestionPion:Pion in suggestionRow.getPions()) {
-            evaluateRow.addPion(computeEvaluatePion(suggestionPion, solutionRow.getPions()));
+                evaluateRow.addPion(computeEvaluatePion(suggestionPion, solutionRow.getPions()));
         }
 
         return evaluateRow;
