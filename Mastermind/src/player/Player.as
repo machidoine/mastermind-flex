@@ -4,11 +4,13 @@ import board.pion.Pion;
 import board.row.EvaluateRow;
 import board.row.Row;
 
+import flash.events.EventDispatcher;
+
 /**
  * ...
  * @author mOveo Games
  */
-public class Player implements IScorable, IResearchable {
+public class Player extends EventDispatcher implements IScorable, IResearchable {
     public function Player(name:String) {
         _name = name;
     }

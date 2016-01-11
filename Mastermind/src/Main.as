@@ -36,6 +36,8 @@ public class Main extends Sprite {
         playBoardSprite.render();
         playBoardSprite.x = 0.15 * stage.stageWidth;
 
+        dispatchEvent()
+
         removeEventListener(Event.ADDED_TO_STAGE, init);
         _mastermindApplication = new MastermindApplication();
         _mastermindApplication.run();

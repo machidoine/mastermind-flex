@@ -5,8 +5,8 @@ package board {
  */
 public class PlayBoard extends Board {
 
-    public function PlayBoard(sizeOfBoard:int) {
-        super(sizeOfBoard);
+    public function PlayBoard(maxLineNumber:int) {
+        super(maxLineNumber);
     }
 }
 

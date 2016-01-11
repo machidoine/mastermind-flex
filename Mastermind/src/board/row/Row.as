@@ -58,11 +58,15 @@ public class Row {
     public function toString():String {
         return "Row "+ y + ": "  + getPions();
     }
-    
+
     public function get emptyRow():Boolean {
-        return _listPions.every(function(element:Pion, index:int, array:Array):Boolean {
+        return _listPions.every(function(element:Pion, index:int, array:Vector.<Pion>):Boolean {
             return element.color === PionColor.EMPTY;
         });
+    }
+
+    public function get listPions():Vector.<Pion> {
+        return _listPions;
     }
 }
 

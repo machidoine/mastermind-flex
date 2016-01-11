@@ -24,7 +24,7 @@ public class PlayBoardTest {
 
     [Test]
     public function isFullWithEmptyPlayboard_shouldReturnFalse():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
 
         var isFull:Boolean = playBoard.isFull();
 
@@ -34,7 +34,7 @@ public class PlayBoardTest {
 
     [Test]
     public function isFullWithOneElement_shouldReturnFalse():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
         playBoard.addRow(new Row());
 
         var isFull:Boolean = playBoard.isFull();
@@ -44,7 +44,7 @@ public class PlayBoardTest {
 
     [Test]
     public function isFullWithFull_shouldReturnTrue():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
         playBoard.addRow(new Row());
         playBoard.addRow(new Row());
 
@@ -56,32 +56,32 @@ public class PlayBoardTest {
 
     [Test]
     public function getListRowWithOneRow_ShouldReturnListWithOneElement():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
         playBoard.addRow(new Row());
 
-        assertThat(playBoard.getListRow(), arrayWithSize(1));
+        assertThat(playBoard.listRows, arrayWithSize(1));
 
     }
 
     [Test]
     public function getListRowWithNoRow_ShouldReturnEmptyList():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
 
-        assertThat(playBoard.getListRow(), arrayWithSize(0));
+        assertThat(playBoard.listRows, arrayWithSize(0));
     }
 
     [Test]
     public function initializeWithZero_shouldFillMaxSizeRow():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
 
         playBoard.initialize(0);
 
-        assertThat(playBoard.getListRow(), arrayWithSize(2));
+        assertThat(playBoard.listRows, arrayWithSize(2));
     }
 
     [Test]
     public function initializeWithZero_shouldHaveRowWithoutPion():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
 
         playBoard.initialize(0);
 
@@ -90,7 +90,7 @@ public class PlayBoardTest {
 
     [Test]
     public function initializeWithOne_shouldHaveRowOnePion():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
 
         playBoard.initialize(1);
 
@@ -99,22 +99,22 @@ public class PlayBoardTest {
 
     [Test]
     public function initializeAfterAddedRow_shouldHaveMaxSizeRow():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
         playBoard.addRow(new Row());
 
         playBoard.initialize(1);
 
-        assertThat(playBoard.getListRow(), arrayWithSize(playBoard.getMaxSize()));
+        assertThat(playBoard.listRows, arrayWithSize(playBoard.getMaxSize()));
     }
 
     [Test]
     public function initializeWithNotEmptyRow_shouldHaveRowsWithEmptyPion():void {
-        playBoard.maxSize = 2;
+        playBoard.maxLineNumber = 2;
         playBoard.addRow(new Row());
 
         playBoard.initialize(1);
 
-        assertThat(playBoard.getListRow(), everyItem(hasProperty("emptyRow", equalTo(true))));
+        assertThat(playBoard.listRows, everyItem(hasProperty("emptyRow", equalTo(true))));
     }
 
 }

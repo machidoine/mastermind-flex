@@ -13,7 +13,7 @@ public class EvaluateRow extends Row {
     }
 
     public function isWinnerRow():Boolean {
-        return _listPions.every(checkIsScorePionGOOD);
+        return listPions.every(checkIsScorePionGOOD);
     }
 
     private function checkIsScorePionGOOD(current:Object, index:int, arr:Vector.<Pion>):Boolean {

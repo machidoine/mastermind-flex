@@ -7,13 +7,13 @@ import board.row.Row;
  */
 public class Board {
 
-    public function Board(lineNumber:int) {
+    public function Board(maxLineNumber:int) {
         _listRows = new Vector.<Row>();
-        _maxSize = lineNumber;
+        _maxLineNumber = maxLineNumber;
     }
 
     private var _listRows:Vector.<Row>;
-    private var    _maxSize:int;
+    private var    _maxLineNumber:int;
 
     // Ajoute une row au tableau de row
 
@@ -29,10 +29,6 @@ public class Board {
     }
 
 
-    // Retourne la liste des rows
-    public function getListRow():Vector.<Row> {
-        return _listRows;
-    }
 
     // Retourne la row courante
     public function currentRow():Row {
@@ -46,23 +42,28 @@ public class Board {
 
     // Retourn true si le tableau de row est plein
     public function isFull():Boolean {
-        return _listRows.length >= _maxSize;
+        return _listRows.length >= _maxLineNumber;
     }
 
     public function getMaxSize():int {
-        return _maxSize;
+        return _maxLineNumber;
     }
 
     public function initialize(lineSize:int):void {
         clear();
-        for (var i:int = 0; i< _maxSize; i++) {
+        for (var i:int = 0; i< _maxLineNumber; i++) {
             addRow(Row.generateEmptyRow(lineSize));
         }
     }
 
-    public function set maxSize(value:int):void {
-        _maxSize = value;
+    public function set maxLineNumber(value:int):void {
+        _maxLineNumber = value;
     }
+
+    public function get listRows():Vector.<Row> {
+        return _listRows;
+    }
+
 }
 
 }
