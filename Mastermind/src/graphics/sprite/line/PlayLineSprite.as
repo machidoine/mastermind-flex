@@ -8,9 +8,9 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
 
-import graphics.Assets;
-import graphics.SpriteFactory;
-import graphics.TileFactory;
+import graphics.framework.Assets;
+import graphics.framework.SpriteFactory;
+import graphics.framework.TileFactory;
 
 public class PlayLineSprite extends LineSprite {
     public function PlayLineSprite(row:Row, zone:Point) {

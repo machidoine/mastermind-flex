@@ -19,6 +19,16 @@ public class Row {
         return row;
     }
 
+    public static function generateFullRow(size:int, color:int):Row {
+        var        row:Row = new Row();
+
+        for (var i:int = 0; i < size; i++) {
+            row.addPion(new Pion(color));
+        }
+
+        return row;
+    }
+
     public function Row() {
         _listPions = new Vector.<Pion>;
     }
@@ -67,6 +77,16 @@ public class Row {
 
     public function get listPions():Vector.<Pion> {
         return _listPions;
+    }
+
+    public static function generateEmptyEvaluatedRow(lineSize:int):Row {
+        var        row:Row = new EvaluateRow();
+
+        for (var i:int = 0; i < lineSize; i++) {
+            row.addPion(new Pion(PionColor.EMPTY));
+        }
+
+        return row;
     }
 }
 

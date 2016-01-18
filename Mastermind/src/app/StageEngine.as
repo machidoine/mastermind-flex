@@ -1,111 +1,76 @@
 package app {
-import board.PlayBoard;
-import board.ScoreBoard;
-import board.row.EvaluateRow;
-import board.row.Row;
+import event.EventEnum;
+import event.GameFinishedEvent;
+import event.GameInitializedEvent;
+import event.InitEvent;
+import event.RowEvaluatedEvent;
+import event.RowToEvaluateEvent;
 
-import player.IPlayerable;
+import flash.events.EventDispatcher;
+import flash.events.IEventDispatcher;
+
 import player.IResearchable;
 import player.IScorable;
+import player.WinnerEnum;
 
 /**
  * ...
  * @author mOveo Games
  */
-public class StageEngine {
-    public function StageEngine(scorablePlayer:IScorable, researchablePlayer:IResearchable, playBoard:PlayBoard, scoreBoard:ScoreBoard) {
-        _scorablePlayer = scorablePlayer;
-        _researchablePlayer = researchablePlayer;
-        _playBoard = playBoard;
-        _scoreBoard = scoreBoard;
-    }
+public class StageEngine extends EventDispatcher {
+    private var _game:Game;
     private var _scorablePlayer:IScorable;
     private var _researchablePlayer:IResearchable;
-    private var _playBoard:PlayBoard;
-    private var _scoreBoard:ScoreBoard;
 
-    // Lancement du niveau
+    public function StageEngine(game:Game, scorablePlayer:IScorable, researchablePlayer:IResearchable) {
+        _game = game;
+        _scorablePlayer = scorablePlayer;
+        _researchablePlayer = researchablePlayer;
 
-    public function run():IPlayerable {
-        clearAllBoard();
-
-        var hideRow:Row = _scorablePlayer.generateHideRow();
-
-        playStageLoop(hideRow);
-
-        return findWinner();
+        _researchablePlayer.addEventListener(EventEnum.ROW_TO_EVALUATE, researchablePlayer_rowToEvaluateHandler);
+        _scorablePlayer.addEventListener(EventEnum.ROW_EVALUATED, scorablePlayer_rowEvaluatedHandler);
+        _scorablePlayer.initEvent(this);
+        _researchablePlayer.initEvent(this);
     }
 
-    private function findWinner():IPlayerable {
-        if (_playBoard.isFull())
-            return _scorablePlayer;
+    private function researchablePlayer_rowToEvaluateHandler(rowToEvaluateEvent:RowToEvaluateEvent):void {
+        trace("stageEngine researchablePlayer_rowToEvaluateHandler");
+        if (!_game.isFinished()) {
+            trace("stageEngine researchablePlayer_rowToEvaluateHandler : game is not finished !");
+            _game.playRowToEvaluate(rowToEvaluateEvent.rowToEvaluate);
+            dispatchEvent(new RowToEvaluateEvent(rowToEvaluateEvent.rowToEvaluate));
+        }
+    }
+
+    private function scorablePlayer_rowEvaluatedHandler(rowEvaluatedEvent:RowEvaluatedEvent):void {
+        trace("stageEngine scorablePlayer_rowEvaluatedHandler");
+        _game.playScore(rowEvaluatedEvent.scoreRow);
+
+        dispatchEvent(new RowEvaluatedEvent(rowEvaluatedEvent.scoreRow));
+
+        if (_game.isFinished()) {
+            dispatchEvent(new GameFinishedEvent(findWinner()));
+        }
+    }
+
+    private function findWinner():String {
+        if (_game.isScoreboardWinner())
+            return WinnerEnum.SCORE_PLAYER;
         else
-            return _researchablePlayer;
+            return WinnerEnum.RESEARCH_PLAYER;
     }
 
-    private function clearAllBoard():void {
-        _playBoard.clear();
-        _scoreBoard.clear();
+    public function initEvent(initialiser:IEventDispatcher):void {
+        initialiser.addEventListener(EventEnum.INIT, initializer_initHandler);
     }
 
-    private function isStageContinue(evaluateRow:EvaluateRow):Boolean {
-        return !evaluateRow.isWinnerRow() && !_playBoard.isFull()
+    private function initializer_initHandler(initEvent:InitEvent):void {
+        trace("initializer_initHandler");
+        _game.initialize();
+        trace("game initialized");
+        dispatchEvent(new GameInitializedEvent());
     }
 
-    private function playRound(hideRow:Row):EvaluateRow {
-        var evaluateRow:EvaluateRow;
-        var rowToEvaluate:Row;
-
-        rowToEvaluate = _researchablePlayer.search(_playBoard);
-        _playBoard.addRow(rowToEvaluate);
-
-        evaluateRow = _scorablePlayer.score(rowToEvaluate, hideRow);
-        _scoreBoard.addRow(evaluateRow);
-
-        return evaluateRow;
-    }
-
-    private function playStageLoop(hideRow:Row):void {
-        var evaluateRow:EvaluateRow;
-        var nbHits:int = 0;
-
-        do
-        {
-            evaluateRow = playRound(hideRow);
-            displayStageInfo(hideRow, nbHits);
-            nbHits++;
-        } while (isStageContinue(evaluateRow));
-    }
-
-    private function displayStageInfo(hideRow:Row, nbHits:int):void {
-        draw(hideRow.getPions(), _scoreBoard.currentRow().getPions(), _playBoard.currentRow().getPions(), nbHits);
-    }
-
-    // Ecrit dans la console de log
-    private function draw(hideRow:Object, evaluateRow:Object, rowToEvaluate:Object, nbHits:int):void {
-        trace("\r\n--------------- MOVE : " + nbHits + " --------------");
-        trace("----------------------------------------");
-        trace("Row cachée :");
-        trace(hideRow);
-
-        trace("----------------------------------------");
-        trace("Proposition SearchablePlayer :");
-        trace(rowToEvaluate);
-
-        trace("----------------------------------------");
-        trace("Notation du ScorePlayer :");
-        trace(evaluateRow);
-
-        /*
-         trace("\r\n\r\n---------------- BOARD -----------------");
-         for (var i:int = 0; i <= _playBoard.getListRow().length; i++)
-         {
-         trace(_playBoard.getRow(i) + _scoreBoard.getRow(i));
-         trace("----------------------------------------");
-         }
-         trace("----------------------------------------");
-         */
-    }
 
 }
 

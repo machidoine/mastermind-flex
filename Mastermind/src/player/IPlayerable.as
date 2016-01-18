@@ -7,6 +7,7 @@ import flash.events.IEventDispatcher;
  */
 public interface IPlayerable extends IEventDispatcher {
     function getName():String;
+    function initEvent(stageEngine:IEventDispatcher):void;
     
 
 }

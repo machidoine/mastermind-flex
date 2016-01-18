@@ -2,7 +2,9 @@ package graphics.sprite {
 import flash.display.Sprite;
 import flash.events.Event;
 
-import graphics.*;
+import graphics.framework.Assets;
+import graphics.framework.SpriteFactory;
+import graphics.framework.TileFactory;
 import graphics.sprite.line.BackgroundLineSprite;
 import graphics.sprite.line.LineSprite;
 
