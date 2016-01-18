@@ -19,14 +19,6 @@ public class Game {
     private var _scoreBoard:ScoreBoard;
     private var _nbHits:int;
 
-// TODO handle findWinner correctly
-//    private function findWinner():IPlayerable {
-//        if (_playBoard.isFull())
-//            return _scorablePlayer;
-//        else
-//            return _researchablePlayer;
-//    }
-
     private function clearAllBoard():void {
         _playBoard.clear();
         _scoreBoard.clear();

@@ -8,12 +8,15 @@ import board.row.Row;
 
 import event.EventEnum;
 import event.GameFinishedEvent;
+import event.IMastermindViewEventHandler;
 import event.RowCreatedEvent;
 import event.RowEvaluatedEvent;
 import event.RowToEvaluateEvent;
 
 import flash.events.EventDispatcher;
 import flash.events.IEventDispatcher;
+
+import graphics.IMastermindView;
 
 public class GraphicalPlayer extends EventDispatcher implements IResearchable, IMastermindViewEventHandler {
     private var _view:IMastermindView;

@@ -1,7 +1,7 @@
 package {
 import app.Game;
 import app.MastermindApplication;
-import app.StageEngineWithEvent;
+import app.StageEngine;
 
 import board.PlayBoard;
 import board.ScoreBoard;
@@ -42,7 +42,7 @@ public class Main extends Sprite {
         trace("game initialized");
         var scorablePlayer:ScorablePlayer = new ScorablePlayer("score");
         scorablePlayer.generateHideRow();
-        var stageEngineWithEvent:StageEngineWithEvent = new StageEngineWithEvent(game, scorablePlayer, new GraphicalPlayer("Researchable", new DummyView(this, game)));
+        var stageEngineWithEvent:StageEngine = new StageEngine(game, scorablePlayer, new GraphicalPlayer("Researchable", new DummyView(this, game)));
         trace("stageEngineWithEvent initialized");
         stageEngineWithEvent.initEvent(this);
         trace("initEvent initialized");
